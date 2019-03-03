@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lexian.manager.goods.dao.SortDao">
+
+
+    <select id="getAllCategoriesPage" resultType="Category">
+	select 
+	id,categoryname as categoryName,type,parentId
+	from category
+</select>
+
+    <select id="getCategories" resultType="Category">
+	select 
+	id,categoryname as categoryName,type,parentId
+	from category
+</select>
+
+    <select id="getCategoryByCategoryName" resultType="Category">
+	select 
+	id,categoryname as categoryName,type,parentId
+	from category
+	where categoryname= #{categoryname,jdbcType=VARCHAR}
+</select>
+
+    <update id="updateCategoryById">
+		update category set categoryname =#{categoryName,jdbcType=VARCHAR} 
+		where id=#{id,jdbcType=INTEGER}
+	
+</update>
+
+    <delete id="deleteCategory">
+		delete 
+		from category
+		where id=#{id,jdbcType=INTEGER}
+</delete>
+
+    <insert id="addCategory" parameterType="Category">
+  		insert into category(categoryname,type,parentid)
+  		values(
+  		#{categoryName,jdbcType=VARCHAR},
+  		#{type,jdbcType=INTEGER},
+  		#{parentId,jdbcType=INTEGER}
+  		)
+  </insert>
+
+    <select id="getCategory" resultType="Category">
+  	SELECT 
+  	id,categoryname AS categoryName,TYPE,parentid AS parentId
+  	FROM category
+  	WHERE categoryname=#{categoryName,jdbcType=VARCHAR}
+  	AND TYPE=#{type,jdbcType=INTEGER}
+  	AND parentid=#{parentId,jdbcType=INTEGER}
+  </select>
+
+    <select id="getCountCategory" resultType="Category">
+  	SELECT 
+  	id,categoryname AS categoryName,TYPE,parentid AS parentId
+  	FROM category
+  	WHERE categoryname=#{categoryName,jdbcType=VARCHAR}
+  	AND TYPE=#{type,jdbcType=INTEGER}
+  </select>
+    <select id="getCountCategoryByParentId" resultType="java.lang.Integer">
+	
+	SELECT COUNT(*)
+	FROM category
+	WHERE parentid=#{parentId,jdbcType=INTEGER}
+	</select>
+
+	<select id="getFirstCategoryList" resultType="Category">
+		select
+		id,categoryname AS categoryName,TYPE
+		from category
+		where TYPE = 1
+	</select>
+</mapper>

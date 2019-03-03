@@ -1,0 +1,62 @@
+<div class="container" ng-controller="orderPaidController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-sm-3">
+                <span class="glyphicon glyphicon-user">&nbsp;订单管理&nbsp;</span>
+                <span class="glyphicon glyphicon-chevron-right">&nbsp;已付款订单&nbsp;</span>
+            </div>
+            <div class="col-sm-9">
+                <div class="col-sm-8">
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-sm">
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model="fromDate" placeholder="开始日期" readonly>
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model="toDate" placeholder="截止日期" readonly>
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="input-group-btn datePicker-btn" ng-click="getFromDate()">
+                                    <button class="btn-default btn">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="searchByDate()">搜索</button>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <searchfilter selected-filter="selctedFilter" filter-str="filterStr" filter-types="filterTypes"></searchfilter>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped" ng-init="getPaidLists()">
+        <tr>
+            <th></th>
+            <th>订单编号</th>
+            <th>下单时间</th>
+            <th>订单状态</th>
+            <th>订单总额</th>
+            <th>取货门店</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="item in aPaidLists | filter: myFilter">
+            <td>{{$index+startIndex}}</td>
+            <td>{{item.orderNo}}</td>
+            <td>{{item.createTime|date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>已付款</td>
+            <td>{{item.totalAmount}}</td>
+            <td>{{item.store.storeName}}</td>
+            <td>
+                <a ui-sref="order/detail({id: item.id})">查看订单详情</a>&emsp;
+                <a href="javascript:;" ng-click="deliverGoods(item.id)">发货</a>
+            </td>
+        </tr>
+    </table>
+    <pagination page-size="pageSize" page-no="pageNo" total-size="{{nTotalSize}}" page-nums="{{nPageNums}}" start-index={{startIndex}} end-index={{lastIndex}} refresh-method="getPaidLists()"></pagination>
+</div>

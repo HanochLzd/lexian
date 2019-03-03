@@ -1,0 +1,42 @@
+<div class="container queryMenuContainer" ng-controller="queryMenuController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-user">&nbsp;管理员管理&nbsp;</span>
+                <span class="glyphicon glyphicon-chevron-right">&nbsp;查看菜单&nbsp;</span>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <searchfilter selected-filter="selctedFilter" filter-str="filterStr" filter-types="filterTypes"></searchfilter>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped" ng-init="getMenus()">
+        <tr>
+            <th></th>
+            <th>菜单名称</th>
+            <th>上级菜单名称</th>
+            <th>菜单背景图片</th>
+            <th>菜单</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="item in oData.aCenterListData | filter: myFilter" ng-switch="item.parentId">
+            <td>{{$index+1}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <span ng-switch-when="null">顶级菜单</span>
+                <span ng-switch-default>一级菜单</span>
+            </td>
+            <td>
+                <i class="icon" ng-class="oData.aIcons[item.id-1]" ng-switch-when="null"></i>
+                <span ng-switch-default>(无)</span>
+            </td>
+            <td>
+                <span ng-switch-when="null">(无)</span>
+                <span ng-switch-default>{{oData.jSref[item.id]}}</span>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>

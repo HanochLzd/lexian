@@ -1,0 +1,46 @@
+<div class="container" ng-controller="queryRoleController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-user">&nbsp;管理员管理&nbsp;</span>
+                <span class="glyphicon glyphicon-chevron-right">&nbsp;查看角色信息&nbsp;</span>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-10">
+                    <searchfilter selected-filter="selctedFilter" filter-str="filterStr" filter-types="filterTypes"></searchfilter>
+                </div>
+                <div class="col-sm-2 ">
+                    <button type="button" class="btn btn-default" ng-click="addRole()">
+                        <span class="glyphicon glyphicon-plus">添加</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped" ng-init="getRoles()">
+        <tr>
+            <th></th>
+            <th>角色名称</th>
+            <th>描述</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
+            <th>操作</th>
+        </tr>
+
+        <tr ng-repeat="item in aRoles | filter: myFilter">
+            <td>{{$index+startIndex}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.createTime|date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{item.updateTime|date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>
+                <a ui-sref="authority/role/editRole({id:item.id, name:item.name, description:item.description})">修改</a>&emsp;
+                <a href="javascript:;">授权</a>&emsp;
+                <a ui-sref="authority/role/editRoleMenu({id:item.id, name:item.name})">添加菜单</a>
+            </td>
+        </tr>
+    </table>
+        <pagination page-size="pageSize" page-no="pageNo" total-size="{{nTotalSize}}" page-nums="{{nPageNums}}" start-index={{startIndex}} end-index={{lastIndex}} refresh-method="getRoles()"></pagination>
+</div>

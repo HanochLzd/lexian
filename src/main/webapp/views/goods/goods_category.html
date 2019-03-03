@@ -1,0 +1,80 @@
+<div class="container" ng-controller="goodsCategoryController">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="col-sm-6">
+				<span class="glyphicon glyphicon-user">&nbsp;商品管理&nbsp;</span> <span
+					class="glyphicon glyphicon-chevron-right">&nbsp;分类管理&nbsp;</span>
+			</div>
+			<div class="col-sm-6">
+				<div class="col-sm-10">
+					<searchfilter selected-filter="selctedFilter" filter-str="filterStr" filter-types="filterTypes"></searchfilter>
+				</div>
+				<div class="col-sm-2 ">
+					<button type="button" class="btn btn-default" ng-click="addCategory()">
+						<span class="glyphicon glyphicon-plus">添加</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<table class="table table-striped" ng-init="getTotalCategory()">
+		<tr>
+			<th>分类ID</th>
+			<th>分类名称</th>
+			<th>分级</th>
+			<th>父类分类ID</th>
+			<th>操作</th>
+		</tr>
+
+		<tr ng-repeat="items in totalCategory | filter: {'categoryName': categoryName}">
+			<td>{{items.id}}</td>
+			<td>{{items.categoryName}}</td>
+			<td>{{items.type}}</td>
+			<td>{{items.parentId}}</td>
+			<td><a
+				ui-sref="goods/category/changeCategory({id:items.firstId,categoryName:items.firstName,parentId:0,type:1})">修改</a>&emsp;
+				<a href="javascript:;" data-toggle="modal" data-target="#confirmDeleteModal" ng-click="updateDeleteId(items.firstId, 1)">删除</a></td>
+		</tr>
+	</table>
+	<pagination page-size="pageSize1" page-no="pageNo1" total-size="{{nTotalSize1}}" page-nums="{{nPageNums1}}" start-index={{startIndex1}} end-index={{lastIndex1}} refresh-method="getTotalCategory()"></pagination>
+	<!--<table class="table table-striped" ng-init="getSecondCategory()">-->
+		<!--<tr>-->
+			<!--<th></th>-->
+			<!--<th>二级分类名称</th>-->
+			<!--<th>分级</th>-->
+			<!--<th>一级分类名称</th>-->
+			<!--<th>操作</th>-->
+		<!--</tr>-->
+
+		<!--<tr ng-repeat="items in aSecondCategory | filter: {'secondName':filterStr}">-->
+			<!--<td>{{$index+startIndex2}}</td>-->
+			<!--<td>{{items.secondName}}</td>-->
+			<!--<td>2</td>-->
+			<!--<td>{{items.firstName}}</td>-->
+			<!--<td>-->
+				<!--<a ui-sref="goods/category/changeCategory({id:items.secondtId,categoryName:items.secondName,parentId:items.firstId,type:2})">修改</a>&emsp;-->
+				<!--<a href="javascript:;" data-toggle="modal" data-target="#confirmDeleteModal" ng-click="updateDeleteId(items.secondtId, 2)">删除</a>-->
+			<!--</td>-->
+		<!--</tr>-->
+	<!--</table>-->
+	<!--<pagination page-size="pageSize2" page-no="pageNo2" total-size="{{nTotalSize2}}" page-nums="{{nPageNums2}}" start-index={{startIndex2}} end-index={{lastIndex2}} refresh-method="getSecondCategory()"></pagination>-->
+	<!--<table class="table table-striped" ng-init="getThirdCategory()">-->
+		<!--<tr>-->
+			<!--<th></th>-->
+			<!--<th>三级分类名称</th>-->
+			<!--<th>分级</th>-->
+			<!--<th>二级分类名称</th>-->
+			<!--<th>操作</th>-->
+		<!--</tr>-->
+		<!--<tr ng-repeat="items in aThirdCategory | filter: {'thirdName':filterStr}">-->
+			<!--<td>{{$index+startIndex3}}</td>-->
+			<!--<td>{{items.thirdName}}</td>-->
+			<!--<td>3</td>-->
+			<!--<td>{{items.secondName}}</td>-->
+			<!--<td><a ui-sref="goods/category/changeCategory({id:items.thirdId,categoryName:items.thirdName,parentId:items.secondtId,type:3})">修改</a>&emsp;-->
+				<!--<a href="javascript:;" data-toggle="modal" data-target="#confirmDeleteModal" ng-click="updateDeleteId(items.thirdId, 3)">删除</a></td>-->
+		<!--</tr>-->
+	<!--</table>-->
+	<!--<pagination page-size="pageSize3" page-no="pageNo3" total-size="{{nTotalSize3}}" page-nums="{{nPageNums3}}" start-index={{startIndex3}} end-index={{lastIndex3}} refresh-method="getThirdCategory()"></pagination>-->
+	<confirmdeletemodal></confirmdeletemodal>
+</div>

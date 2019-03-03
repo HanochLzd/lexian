@@ -1,0 +1,29 @@
+<div class="container" ng-controller="queryPrivilegesController" ng-init="getPrivileges()">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-user">&nbsp;权限管理&nbsp;</span>
+                <span class="glyphicon glyphicon-chevron-right">&nbsp;权限查询&nbsp;</span>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <searchfilter selected-filter="selctedFilter" filter-str="filterStr" filter-types="filterTypes"></searchfilter>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>权限名称</th>
+            <th>描述</th>
+        </tr>
+        <tr ng-repeat="item in aPrivileges | filter: myFilter">
+            <td>{{$index+startIndex}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+        </tr>
+    </table>
+    <pagination page-size="pageSize" page-no="pageNo" total-size="{{nTotalSize}}" page-nums="{{nPageNums}}" start-index={{startIndex}} end-index={{lastIndex}} refresh-method="getPrivileges()"></pagination>
+</div>
