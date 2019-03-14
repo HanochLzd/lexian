@@ -1,6 +1,3 @@
-/**
- * Copyright 2017  Chinasofti , Inc. All rights reserved.
- */
 package com.lexian.manager.authority.controller;
 
 import javax.validation.Valid;
@@ -16,7 +13,9 @@ import com.lexian.manager.authority.service.RoleService;
 import com.lexian.web.Page;
 import com.lexian.web.ResultHelper;
 
-
+/**
+ * @author luozidong
+ */
 @Controller
 @RequestMapping("handleManager")
 public class HandleManagerController {
@@ -34,7 +33,9 @@ public class HandleManagerController {
         this.managerService = managerService;
     }
 
-    //handleManager/getManagers.do
+    /**
+     * handleManager/getManagers.do
+     */
     @ResponseBody
     @RequestMapping("getManagers.do")
     public ResultHelper getManagers(Page page) {
@@ -74,7 +75,6 @@ public class HandleManagerController {
     @ResponseBody
     @RequestMapping("getRoleByManagerId.do")
     public ResultHelper getRoleByManagerId(Integer managerId) {
-
         return roleService.getRoleByManagerId(managerId);
     }
 }

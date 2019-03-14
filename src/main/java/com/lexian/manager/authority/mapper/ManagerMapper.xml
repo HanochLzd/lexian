@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lexian.manager.authority.dao.ManagerDao" >
-  <resultMap id="UserWithMenusMap" type="Manager" >
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <collection property="menus" ofType="Menu">
-    	<id column="id" property="id" jdbcType="INTEGER"/>
-    	<result column="mname" property="name" jdbcType="VARCHAR" />
-    	<result column="url" property="url" jdbcType="VARCHAR" />
-    	<result column="parentid" property="parentId" jdbcType="INTEGER" />
-    </collection>
-    
-  </resultMap>
-  <sql id="Base_Column_List" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lexian.manager.authority.dao.ManagerDao">
+    <resultMap id="UserWithMenusMap" type="Manager">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <collection property="menus" ofType="Menu">
+            <id column="id" property="id" jdbcType="INTEGER"/>
+            <result column="mname" property="name" jdbcType="VARCHAR"/>
+            <result column="url" property="url" jdbcType="VARCHAR"/>
+            <result column="parentid" property="parentId" jdbcType="INTEGER"/>
+        </collection>
+
+    </resultMap>
+    <sql id="Base_Column_List">
     id, name, info, createtime, updatetime, status
   </sql>
-  <select id="getManagerByNameAndPassword" resultType="Manager">
+    <select id="getManagerByNameAndPassword" resultType="Manager">
     select 
     id,name,status
     from manager
     where name=#{name,jdbcType=VARCHAR}
      and password=#{password,jdbcType=VARCHAR}
   </select>
-  
-  <select id="getUserWithMenus" parameterType="java.lang.Integer" 
-  resultMap="UserWithMenusMap">
+
+    <select id="getUserWithMenus" parameterType="java.lang.Integer"
+            resultMap="UserWithMenusMap">
   		SELECT DISTINCT manager.name,menu.id,menu.url,menu.name mname,
   		menu.parentid,menu.backurl 
   		FROM menu ,manager,role_menu ,role,role_manager 
@@ -34,9 +34,9 @@
   		AND role_menu.menu_id=menu.id
   		and manager.id=#{id,jdbcType=INTEGER}
   </select>
-  
-  <select id="getPrivilegesPage" parameterType="java.util.Map"
-   resultType="Privilege">
+
+    <select id="getPrivilegesPage" parameterType="java.util.Map"
+            resultType="Privilege">
   		SELECT DISTINCT privilege.id,privilege.url,privilege.name,
   		privilege.description 
   		FROM privilege ,manager,role_privilege ,role,role_manager 
@@ -46,10 +46,10 @@
   		AND role_privilege.privilege_id=privilege.id
   		and manager.id=#{id,jdbcType=INTEGER}
   </select>
-  
-  
-  <select id="getPrivilegeUrls" parameterType="java.lang.Integer" 
-  resultType="java.lang.String">
+
+
+    <select id="getPrivilegeUrls" parameterType="java.lang.Integer"
+            resultType="java.lang.String">
   		SELECT DISTINCT privilege.url
   		FROM privilege ,manager,role_privilege ,role,role_manager 
   		WHERE manager.id=role_manager.manager_id
@@ -58,10 +58,10 @@
   		AND role_privilege.privilege_id=privilege.id
   		and manager.id=#{id,jdbcType=INTEGER}
   </select>
-  
-  
-  <insert id="addManager" parameterType="Manager" keyProperty="id"
-   useGeneratedKeys="true" >
+
+
+    <insert id="addManager" parameterType="Manager" keyProperty="id"
+            useGeneratedKeys="true">
   		
   		
   		insert into manager(name,password, info, createtime, updatetime, status)
@@ -75,47 +75,48 @@
   		)
   		
   </insert>
-  
-  <update id="updateManager" parameterType="Manager">
-  
-  	update manager
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="info != null" >
-        info = #{info,jdbcType=VARCHAR},
-      </if>
-     
-      <if test="updateTime != null" >
-        updatetime = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER}
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  
-  <select id="getManagersPage" resultType="Manager">
-  		select DISTINCT <include refid="Base_Column_List"/>
-  		from manager
-  </select>
-  
-  <delete id="deleteManagerById" parameterType="java.lang.Integer">
+
+    <update id="updateManager" parameterType="Manager">
+
+        update manager
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="info != null">
+                info = #{info,jdbcType=VARCHAR},
+            </if>
+
+            <if test="updateTime != null">
+                updatetime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getManagersPage" resultType="Manager">
+        select DISTINCT
+        <include refid="Base_Column_List"/>
+        from manager
+    </select>
+
+    <delete id="deleteManagerById" parameterType="java.lang.Integer">
   	delete from manager where id=#{id}
   </delete>
-  
-  
-  <select id="verifyPassword" resultType="java.lang.Integer">
+
+
+    <select id="verifyPassword" resultType="java.lang.Integer">
   		select id from manager where id=#{id}
   		 and password=#{password,jdbcType=VARCHAR}
   </select>
-  
-  <select id="getMenusPage" resultType="Menu" parameterType="java.util.Map">
+
+    <select id="getMenusPage" resultType="Menu" parameterType="java.util.Map">
   
   		SELECT DISTINCT menu.id,url,menu.name,menu.parentid,menu.backurl 
   		FROM menu ,manager,role_menu ,role,role_manager 
@@ -125,9 +126,9 @@
   		AND role_menu.menu_id=menu.id
   		and manager.id=#{id,jdbcType=INTEGER}
   </select>
-  <select id="hasNameUsed" parameterType="java.lang.String"
-   resultType="java.lang.Integer">
+    <select id="hasNameUsed" parameterType="java.lang.String"
+            resultType="java.lang.Integer">
   		select count(id) from manager where name=#{name,jdbcType=VARCHAR}
   </select>
-  
+
 </mapper>

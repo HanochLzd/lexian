@@ -1,6 +1,3 @@
-/**
- * Copyright 2017  Chinasofti , Inc. All rights reserved.
- */
 package com.lexian.manager.goods.controller;
 
 import javax.validation.Valid;

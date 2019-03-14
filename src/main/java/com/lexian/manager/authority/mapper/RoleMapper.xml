@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lexian.manager.authority.dao.RoleDao" >
-  
-  <sql id="Base_Column_List" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lexian.manager.authority.dao.RoleDao">
+
+    <sql id="Base_Column_List">
     id,name,description,createTime,updateTime
   </sql>
-  
-  <select id="getRolesPage" resultType="Role">
-  		select DISTINCT <include refid="Base_Column_List"/> from role
-  </select>
-  
-  
-  <select id="getAllRoles" resultType="Role">
-  		select DISTINCT <include refid="Base_Column_List"/> from role
-  </select>
-  
-  <insert id="addRole" parameterType="Role" keyProperty="id"
-   useGeneratedKeys="true" > 
+
+    <select id="getRolesPage" resultType="Role">
+        select DISTINCT
+        <include refid="Base_Column_List"/>
+        from role
+    </select>
+
+
+    <select id="getAllRoles" resultType="Role">
+        select DISTINCT
+        <include refid="Base_Column_List"/>
+        from role
+    </select>
+
+    <insert id="addRole" parameterType="Role" keyProperty="id"
+            useGeneratedKeys="true">
   		insert into role(name,description,createtime,updatetime) values(
   			#{name,jdbcType=VARCHAR},
   			#{description,jdbcType=VARCHAR},
@@ -25,59 +29,59 @@
   			#{updateTime,jdbcType=TIMESTAMP}
   		)
   </insert>
-  
-  <update id="updateRole" parameterType="Role">
-  
-  	update role
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        updatetime = #{updateTime,jdbcType=TIMESTAMP}
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  
-  <select id="getMenus" resultType="Menu" parameterType="java.lang.Integer">
-  		select DISTINCT menu.id,menu.name,menu.parentid as parentId
-  		from role,role_menu,menu
-  		where 
-  		menu.id=role_menu.menu_id
-  		and role.id=role_menu.role_id
-  		<if test="id != null">
-  			and role.id=#{id,jdbcType=INTEGER}
-  		</if>
-  </select>
-  
-  
-  <select id="getPrivileges" resultType="Privilege" 
-   parameterType="java.lang.Integer">
-  		select DISTINCT privilege.id,privilege.name 
-  		from privilege,role_privilege,role
-  		where 
-  		privilege.id=role_privilege.privilege_id
-  		and role.id=role_privilege.role_id
-  		<if test="id != null">
-  			and role.id=#{id,jdbcType=INTEGER}
-  		</if>
-  </select>
-  
-  <select id="hasNameUsed" parameterType="java.lang.String" 
-  resultType="java.lang.Integer">
+
+    <update id="updateRole" parameterType="Role">
+
+        update role
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                updatetime = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getMenus" resultType="Menu" parameterType="java.lang.Integer">
+        select DISTINCT menu.id,menu.name,menu.parentid as parentId
+        from role,role_menu,menu
+        where
+        menu.id=role_menu.menu_id
+        and role.id=role_menu.role_id
+        <if test="id != null">
+            and role.id=#{id,jdbcType=INTEGER}
+        </if>
+    </select>
+
+
+    <select id="getPrivileges" resultType="Privilege"
+            parameterType="java.lang.Integer">
+        select DISTINCT privilege.id,privilege.name
+        from privilege,role_privilege,role
+        where
+        privilege.id=role_privilege.privilege_id
+        and role.id=role_privilege.role_id
+        <if test="id != null">
+            and role.id=#{id,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="hasNameUsed" parameterType="java.lang.String"
+            resultType="java.lang.Integer">
   		select count(id) from role where name=#{name,jdbcType=VARCHAR}
   </select>
-  
-  <select id="getRoleByManagerId" parameterType="java.lang.Integer" 
-  resultType="Role">
+
+    <select id="getRoleByManagerId" parameterType="java.lang.Integer"
+            resultType="Role">
   		select r.id,name from role r,role_manager rm 
   		where
   		rm.role_id=r.id
   		and rm.manager_id=#{managerId}
   </select>
-  
+
 </mapper>

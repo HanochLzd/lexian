@@ -1,6 +1,3 @@
-/**
-*  Copyright 2017  Chinasofti , Inc. All rights reserved.
-*/
 package com.lexian.manager.authority.service;
 
 import com.lexian.manager.authority.bean.Manager;
@@ -8,39 +5,33 @@ import com.lexian.web.Page;
 import com.lexian.web.ResultHelper;
 
 /**
- * 
- * <p>Title: 乐鲜生活</p>
- * <p>Description: 乐鲜生活购物系统</p>
- * <p>Copyright: Copyright (c) 200x</p>
- * <p>Company: 中软国际</p>
- * @author 郝伟
- * @version 1.0
+ * @author luozidong
  */
 public interface ManagerService {
 
-	public ResultHelper signIn(String name, String password);
-	
-	public ResultHelper getPrivileges(Integer id, Page page);
-	
-	public ResultHelper getPrivilegeUrls(Integer id);
-	
-	public ResultHelper getUserWithMenus(Integer id);
-	
-	public ResultHelper addManager(Manager manager, Integer[] roleId);
-	
-	public ResultHelper updateManager(Manager manager);
+    ResultHelper signIn(String name, String password);
 
-	public ResultHelper getManagers(Page page);
+    ResultHelper getPrivileges(Integer id, Page page);
 
-	public ResultHelper deleteManagerById(Integer id);
+    ResultHelper getPrivilegeUrls(Integer id);
 
-	public ResultHelper verifyPassword(Integer id, String password);
+    ResultHelper getUserWithMenus(Integer id);
 
-	public ResultHelper updateManagerPassword(Manager manager, String newPass);
+    ResultHelper addManager(Manager manager, Integer[] roleId);
 
-	public ResultHelper getMenus(Integer id, Page page);
-	
-	public ResultHelper updateAssociatedRole(Manager manager, Integer[] newRoleId);
+    ResultHelper updateManager(Manager manager);
 
-	
+    ResultHelper getManagers(Page page);
+
+    ResultHelper deleteManagerById(Integer id);
+
+    ResultHelper verifyPassword(Integer id, String password);
+
+    ResultHelper updateManagerPassword(Manager manager, String newPass);
+
+    ResultHelper getMenus(Integer id, Page page);
+
+    ResultHelper updateAssociatedRole(Manager manager, Integer[] newRoleId);
+
+
 }
