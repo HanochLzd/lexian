@@ -7,7 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="lexian" />
+        <module name="suishen-redis" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="suishenredis" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
