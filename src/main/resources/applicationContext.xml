@@ -60,6 +60,8 @@
         </tx:attributes>
     </tx:advice>
 
+    <aop:aspectj-autoproxy/>
+
     <!--<aop:config>-->
         <!--<aop:pointcut expression="execution(* com.lexian.manager.*.service.impl.*.*(..))" id="txPointcut"/>-->
         <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>-->
