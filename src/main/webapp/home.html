@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>乐鲜超市</title>
-    <link rel="shortcut icon" href="http://static01.yiguo.com/common/images/yiguo.ico">
+    <title>乐鲜超市后台管理系统</title>
+    <link rel="shortcut icon" href="image/logo-color.svg">
     <link rel="stylesheet" href="style/common.css" type="text/css">
     <link rel="stylesheet" href="framework/bootstrap3/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="framework/datePicker/font-awesome.min.css">
@@ -34,7 +34,7 @@
 <div class="container">
     <header>
         <div class="header-pic">
-            <img src="http://localhost:8080/lexian/image/wenzi.png" alt="header-pic" title="欢迎光临乐鲜超市">
+            <img src="image/wenzi.png" alt="header-pic" title="欢迎光临乐鲜超市">
         </div>
     </header>
     <div class="main" ng-app="lx-app">
@@ -65,7 +65,7 @@
                             <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
                                     <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" ng-href="#{{item.name}}">
-                                        <img src="http://localhost:8080/lexian/image/{{item.backUrl}}"/><strong ng-bind="item.name"></strong><span class="glyphicon glyphicon-chevron-down"></span>
+                                        <img src="/image/{{item.backUrl}}"/><strong ng-bind="item.name"></strong><span class="glyphicon glyphicon-chevron-down"></span>
                                     </a>
                                 </h4>
                             </div>

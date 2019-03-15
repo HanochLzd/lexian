@@ -52,18 +52,21 @@
     <!-- 配置事务属性 -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="get*" read-only="true"/>
-            <tx:method name="*"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="apply*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 
-    <aop:config>
-        <aop:pointcut expression="execution(* com.lexian.manager.*.service.impl.*.*(..))" id="txPointcut"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
-    </aop:config>
+    <!--<aop:config>-->
+        <!--<aop:pointcut expression="execution(* com.lexian.manager.*.service.impl.*.*(..))" id="txPointcut"/>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>-->
+    <!--</aop:config>-->
 
     <!-- 配置自动扫描的包 -->
-    <context:component-scan base-package="com.lexian.manager"/>
+    <context:component-scan base-package="com.lexian"/>
 
     <!-- 相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean，配置一些messageconverter -->
     <!--

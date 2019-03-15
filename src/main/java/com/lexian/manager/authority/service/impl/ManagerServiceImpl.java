@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lexian.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.lexian.manager.authority.bean.Manager;
@@ -45,6 +45,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 
     @Override
+    @Cacheable
     public ResultHelper signIn(String name, String password) {
 
         Manager manager = managerDao.getManagerByNameAndPassword(name, password);
@@ -65,6 +66,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Cacheable
     public ResultHelper getPrivileges(Integer id, Page page) {
 
         Map<String, Object> params = new HashMap<>();
@@ -79,12 +81,13 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Cacheable
     public ResultHelper getUserWithMenus(Integer id) {
-        // TODO Auto-generated method stub
         return new ResultHelper(Constant.CODE_SUCCESS, managerDao.getUserWithMenus(id));
     }
 
     @Override
+    @Cacheable
     public ResultHelper getPrivilegeUrls(Integer id) {
 
         return new ResultHelper(Constant.CODE_SUCCESS, managerDao.getPrivilegeUrls(id));
@@ -147,6 +150,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Cacheable
     public ResultHelper getManagers(Page page) {
 
         Map<String, Object> params = new HashMap<>();
@@ -183,6 +187,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Cacheable
     public ResultHelper getMenus(Integer id, Page page) {
 
         Map<String, Object> params = new HashMap<>();
