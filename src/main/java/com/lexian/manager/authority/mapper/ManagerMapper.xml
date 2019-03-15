@@ -8,6 +8,7 @@
             <id column="id" property="id" jdbcType="INTEGER"/>
             <result column="mname" property="name" jdbcType="VARCHAR"/>
             <result column="url" property="url" jdbcType="VARCHAR"/>
+            <result column="backurl" property="backUrl" jdbcType="VARCHAR"/>
             <result column="parentid" property="parentId" jdbcType="INTEGER"/>
         </collection>
 
