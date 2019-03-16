@@ -27,7 +27,7 @@ import javax.annotation.Resource;
  * @author luozidong
  */
 @Service
-public class ManagerServiceImpl implements ManagerService {
+public class ManagerServiceImpl {
 
     @Resource
     private ManagerDao managerDao;
@@ -44,8 +44,6 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
 
-    @Override
-    @Cacheable
     public ResultHelper signIn(String name, String password) {
 
         Manager manager = managerDao.getManagerByNameAndPassword(name, password);
@@ -65,8 +63,7 @@ public class ManagerServiceImpl implements ManagerService {
         return result;
     }
 
-    @Override
-    @Cacheable
+//    @Cacheable
     public ResultHelper getPrivileges(Integer id, Page page) {
 
         Map<String, Object> params = new HashMap<>();
@@ -80,20 +77,17 @@ public class ManagerServiceImpl implements ManagerService {
         return result;
     }
 
-    @Override
     @Cacheable
     public ResultHelper getUserWithMenus(Integer id) {
         return new ResultHelper(Constant.CODE_SUCCESS, managerDao.getUserWithMenus(id));
     }
 
-    @Override
-    @Cacheable
+//    @Cacheable
     public ResultHelper getPrivilegeUrls(Integer id) {
 
         return new ResultHelper(Constant.CODE_SUCCESS, managerDao.getPrivilegeUrls(id));
     }
 
-    @Override
     public ResultHelper addManager(Manager manager, Integer[] roleId) {
 
 
@@ -129,7 +123,6 @@ public class ManagerServiceImpl implements ManagerService {
         return result;
     }
 
-    @Override
     public ResultHelper updateManager(Manager manager) {
         Date time = new Date();
         manager.setUpdateTime(time);
@@ -137,7 +130,6 @@ public class ManagerServiceImpl implements ManagerService {
         return new ResultHelper(Constant.CODE_SUCCESS);
     }
 
-    @Override
     public ResultHelper updateManagerPassword(Manager manager, String newPass) {
 
         ResultHelper result = verifyPassword(manager.getId(), manager.getPassword());
@@ -149,8 +141,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     }
 
-    @Override
-    @Cacheable
+//    @Cacheable
     public ResultHelper getManagers(Page page) {
 
         Map<String, Object> params = new HashMap<>();
@@ -164,13 +155,11 @@ public class ManagerServiceImpl implements ManagerService {
 
     }
 
-    @Override
     public ResultHelper deleteManagerById(Integer id) {
         managerDao.deleteManagerById(id);
         return new ResultHelper(Constant.CODE_SUCCESS);
     }
 
-    @Override
     public ResultHelper verifyPassword(Integer id, String password) {
 
         Integer manager = managerDao.verifyPassword(id, password);
@@ -186,7 +175,6 @@ public class ManagerServiceImpl implements ManagerService {
 
     }
 
-    @Override
     @Cacheable
     public ResultHelper getMenus(Integer id, Page page) {
 
@@ -203,7 +191,6 @@ public class ManagerServiceImpl implements ManagerService {
         return new ResultHelper(Constant.CODE_SUCCESS, page);
     }
 
-    @Override
     public ResultHelper updateAssociatedRole(Manager manager, Integer[] newRoleId) {
 
 

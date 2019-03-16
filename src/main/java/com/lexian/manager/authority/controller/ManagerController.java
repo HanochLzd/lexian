@@ -3,9 +3,11 @@ package com.lexian.manager.authority.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.lexian.manager.authority.service.impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,16 +30,8 @@ import com.lexian.web.ResultHelper;
 @RequestMapping("manager")
 public class ManagerController {
 
-    @Autowired
-    private ManagerService managerService;
-
-    public ManagerService getManagerService() {
-        return managerService;
-    }
-
-    public void setManagerService(ManagerService managerService) {
-        this.managerService = managerService;
-    }
+    @Resource
+    private ManagerServiceImpl managerService;
 
     /**
      * 登录

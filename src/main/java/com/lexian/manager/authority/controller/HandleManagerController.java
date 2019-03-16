@@ -2,6 +2,7 @@ package com.lexian.manager.authority.controller;
 
 import javax.validation.Valid;
 
+import com.lexian.manager.authority.service.impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,18 +21,10 @@ import com.lexian.web.ResultHelper;
 @RequestMapping("handleManager")
 public class HandleManagerController {
     @Autowired
-    private ManagerService managerService;
+    private ManagerServiceImpl managerService;
 
     @Autowired
     private RoleService roleService;
-
-    public ManagerService getManagerService() {
-        return managerService;
-    }
-
-    public void setManagerService(ManagerService managerService) {
-        this.managerService = managerService;
-    }
 
     /**
      * handleManager/getManagers.do

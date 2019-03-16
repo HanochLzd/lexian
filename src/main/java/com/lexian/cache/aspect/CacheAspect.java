@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +57,16 @@ public class CacheAspect {
             String key = generateKey(method, joinPoint);
 
             result = redisCacheService.getCache(key);
+
+            System.out.println("读缓存------>" + result);
+
             if (result == null) {
                 //缓存中不存在,查询，然后放入缓存
                 int expireTime = cacheable.expireTime();
                 //查询数据库等
                 result = joinPoint.proceed();
                 //放入缓存--后续可以修改为异步
+                System.out.println("写缓存------>" + key + " : " + result);
                 redisCacheService.putCache(key, result, expireTime);
                 return result;
             } else {
@@ -109,8 +114,6 @@ public class CacheAspect {
 //    }
 
 
-
-
     /**
      * 根据参数类型与值动态生成key
      *
@@ -120,7 +123,19 @@ public class CacheAspect {
      */
     private String generateKey(Method method, ProceedingJoinPoint joinPoint) {
 
-        return CacheKeyUtil.getKey(method.getReturnType(), joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getArgs());
+        JSONObject paramJson = new JSONObject();
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        String[] params = methodSignature.getParameterNames();
+        Object[] args = joinPoint.getArgs();
+
+        for (int i = 0; i < params.length; i++) {
+            try {
+                paramJson.put(params[i], args[i]);
+            } catch (Exception e) {
+                logger.error("execute logging point is failed:(", e);
+            }
+        }
+        return CacheKeyUtil.getKey(method.getReturnType(), paramJson);
     }
 
 

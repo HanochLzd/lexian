@@ -15,7 +15,7 @@ public @interface Cacheable {
     /**
      * 过期时间,默认60秒
      */
-    int expireTime() default 60;
+    int expireTime() default 3*60;
 
     /**
      * 设置缓存类型(分布式，本地)
