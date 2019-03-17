@@ -135,7 +135,7 @@ public class CacheAspect {
                 logger.error("execute logging point is failed:(", e);
             }
         }
-        return CacheKeyUtil.getKey(method.getReturnType(), paramJson);
+        return CacheKeyUtil.getKey(method.getReturnType(), method.getName(),paramJson);
     }
 
 
