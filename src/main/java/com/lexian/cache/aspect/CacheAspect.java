@@ -3,16 +3,13 @@ package com.lexian.cache.aspect;
 import com.lexian.cache.annotation.Cacheable;
 import com.lexian.cache.service.RedisCacheService;
 import com.lexian.cache.util.CacheKeyUtil;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -77,42 +74,6 @@ public class CacheAspect {
         }
         return result;
     }
-
-
-//    @Around("@annotation(com.lexian.cache.annotation.Cacheable)")
-//    public Object process(ProceedingJoinPoint joinPoint) {
-//        Object result = null;
-//        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-//        try {
-//            if (method.getParameterTypes().length == 0) {
-//                return joinPoint.proceed();
-//            }
-//            //获取注解
-//            Cacheable cacheable = getAnnotation(method);
-//            if (cacheable == null) {
-//                return joinPoint.proceed();
-//            }
-//
-//            String key = generateKey(method, joinPoint);
-//
-//            result = redisCacheService.getCache(key);
-//            if (result == null) {
-//                //缓存中不存在,查询，然后放入缓存
-//                int expireTime = cacheable.expireTime();
-//                //查询数据库等
-//                result = joinPoint.proceed();
-//                //放入缓存--后续可以修改为异步
-//                redisCacheService.putCache(key, result, expireTime);
-//                return result;
-//            } else {
-//                return result;
-//            }
-//        } catch (Throwable throwable) {
-//            logger.error("execute cache point is failed ", throwable);
-//        }
-//        return result;
-//    }
-
 
     /**
      * 根据参数类型与值动态生成key
