@@ -117,8 +117,7 @@ public class ManagerController {
     @ResponseBody
     @RequestMapping("getUserWithMenus.do")
     public ResultHelper getUserWithMenus(Map<String, Object> model) {
-        ResultHelper result = managerService.getUserWithMenus((Integer) model.get("managerId"));
-        return result;
+        return managerService.getUserWithMenus((Integer) model.get("managerId"));
     }
 
     /**
