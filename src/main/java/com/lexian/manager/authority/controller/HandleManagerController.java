@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lexian.manager.authority.bean.Manager;
-import com.lexian.manager.authority.service.ManagerService;
 import com.lexian.manager.authority.service.RoleService;
 import com.lexian.web.Page;
 import com.lexian.web.ResultHelper;

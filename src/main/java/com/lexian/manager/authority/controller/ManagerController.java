@@ -8,16 +8,13 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.lexian.manager.authority.service.impl.ManagerServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.lexian.manager.authority.bean.Manager;
-import com.lexian.manager.authority.service.ManagerService;
 import com.lexian.utils.Constant;
 import com.lexian.web.Page;
 import com.lexian.web.ResultHelper;
@@ -44,8 +41,6 @@ public class ManagerController {
     @ResponseBody
     @RequestMapping(value = "signIn.do")
     public ResultHelper signIn(String name, String password, HttpSession session, Map<String, Object> model) {
-
-        System.out.println();
 
         ResultHelper result = managerService.signIn(name, password);
 
@@ -130,8 +125,7 @@ public class ManagerController {
     @ResponseBody
     @RequestMapping("getMenus.do")
     public ResultHelper gethMenus(Map<String, Object> model, Page page) {
-        ResultHelper result = managerService.getMenus((Integer) model.get("managerId"), page);
-        return result;
+        return managerService.getMenus((Integer) model.get("managerId"), page);
     }
 
 }
