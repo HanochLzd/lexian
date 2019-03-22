@@ -9,7 +9,7 @@ import com.lexian.context.SessionContext;
 /**
  * @author luozidong
  */
-public class SessionListener implements HttpSessionListener{
+public class SessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
@@ -17,15 +17,15 @@ public class SessionListener implements HttpSessionListener{
     }
 
     @Override
-	public void sessionDestroyed(HttpSessionEvent se) {
-		
-		HttpSession session = se.getSession();
-		
-		Integer managerId=(Integer) session.getAttribute("managerId");
-		if(managerId!=null){
-			SessionContext.getInstance().deleteSession(managerId);
-		}
-		//TODO ?????
+    public void sessionDestroyed(HttpSessionEvent se) {
+
+        HttpSession session = se.getSession();
+
+        Integer managerId = (Integer) session.getAttribute("managerId");
+        if (managerId != null) {
+            SessionContext.getInstance().deleteSession(managerId);
+        }
+        //TODO 疑问
         //HttpSessionListener.super.sessionDestroyed(se);
-	}
+    }
 }

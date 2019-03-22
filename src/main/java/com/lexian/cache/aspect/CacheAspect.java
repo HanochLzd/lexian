@@ -55,7 +55,7 @@ public class CacheAspect {
 
             result = redisCacheService.getCache(key);
 
-            System.out.println("读缓存------>" + result);
+            logger.info("read Redis cache - {}", result);
 
             if (result == null) {
                 //缓存中不存在,查询，然后放入缓存
@@ -63,7 +63,7 @@ public class CacheAspect {
                 //查询数据库等
                 result = joinPoint.proceed();
                 //放入缓存--后续可以修改为异步
-                System.out.println("写缓存------>" + key + " : " + result);
+                logger.info("write redis cache - key:{},value:{}", key, result);
                 redisCacheService.putCache(key, result, expireTime);
                 return result;
             } else {
@@ -96,7 +96,7 @@ public class CacheAspect {
                 logger.error("execute logging point is failed:(", e);
             }
         }
-        return CacheKeyUtil.getKey(method.getReturnType(), method.getName(),paramJson);
+        return CacheKeyUtil.getKey(method.getReturnType(), method.getName(), paramJson);
     }
 
 

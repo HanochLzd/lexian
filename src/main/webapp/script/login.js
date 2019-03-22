@@ -7,8 +7,17 @@ var myApp = angular.module('singInApp', [])
                 , shade: 0.01
             });
 
-
-            $http.get('manager/signIn.do', {params: {name: $scope.username, password: $scope.pwd}})
+            let config = {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function (obj) {
+                    let str = [];
+                    for (let s in obj) {
+                        str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                    }
+                    return str.join("&");
+                }
+            };
+            $http.post('manager/signIn.do', {name: $scope.username, password: $scope.pwd}, config)
                 .success(function (data, status) {
                     if (data.code === 1 && status === 200) {
 
@@ -16,6 +25,8 @@ var myApp = angular.module('singInApp', [])
                         window.location.pathname += 'home.html';
                     } else if (-200 === data.code) {
                         layer.msg('该用户已被禁用！请联系管理员:(', {icon: 5});
+                    } else if (-7 === data.code) {
+                        layer.msg('登录失败', {icon: 5});
                     } else {
                         layer.msg('登录异常', {icon: 5});
                     }

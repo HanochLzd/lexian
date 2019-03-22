@@ -1,6 +1,3 @@
-/**
- * Created by 冯富铭 on 2017/7/6.
- */
 myApp.filter('pieChartFilter', function () {
     return function (input) {
         let arr = [];

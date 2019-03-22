@@ -1,6 +1,3 @@
-/**
-*  Copyright 2017  Chinasofti , Inc. All rights reserved.
-*/
 package com.lexian.filter;
 
 import java.io.IOException;
@@ -15,65 +12,64 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 /**
- * <p>Title: 乐鲜生活</p>
- * <p>Description: 乐鲜生活购物系统</p>
- * <p>Copyright: Copyright (c) 200x</p>
- * <p>Company: 中软国际</p>
- * @author 郝伟
- * @version 1.0
+ * @author luozidong
  */
 public class PageFilter implements Filter {
 
-	private String homePage;
-	private String root;
-	private String loginPage;
+    private String homePage;
+    private String root;
+    private String loginPage;
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		homePage = filterConfig.getInitParameter("home-page");
-		
-		loginPage=filterConfig.getInitParameter("login-page");
-		root = filterConfig.getServletContext().getContextPath();
-	}
+    @Override
+    public void init(FilterConfig filterConfig) {
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;
-		
-		
-		String url=req.getRequestURI().toString();
-		
-		if(url.equals(root+"/")||url.contains(loginPage)){
-			if(isLogin(req, resp)){
-				resp.sendRedirect(root + "/" + homePage);
-				return;
-			}
-		}else if(url.contains(homePage)){
-			if(!isLogin(req, resp)){
-				resp.sendRedirect(root + "/" + loginPage);
-				return ;
-			}
-		}
-		chain.doFilter(request, response);
-	}
+        final String homePageStr = "home-page";
+        final String loginPageStr = "login-page";
 
-	private boolean isLogin(HttpServletRequest req, HttpServletResponse resp) {
-		boolean goHome=true;
-		HttpSession session = req.getSession();
-		if (session.getAttribute("managerId") == null) {
-			goHome = false;
-		}
-		
-		return goHome;
-	}
+        homePage = filterConfig.getInitParameter(homePageStr);
+        loginPage = filterConfig.getInitParameter(loginPageStr);
 
+        root = filterConfig.getServletContext().getContextPath();
+    }
 
-	@Override
-	public void destroy() {
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
+        final String separator = "/";
 
-	}
+        String url = req.getRequestURI();
+
+        if (url.equals(root + separator) || url.contains(loginPage)) {
+            if (isLogin(req, resp)) {
+                resp.sendRedirect(root + separator + homePage);
+                return;
+            }
+        } else if (url.contains(homePage)) {
+            if (!isLogin(req, resp)) {
+                resp.sendRedirect(root + separator + loginPage);
+                return;
+            }
+        }
+        chain.doFilter(request, response);
+    }
+
+    private boolean isLogin(HttpServletRequest req, HttpServletResponse resp) {
+        boolean goHome = true;
+        final String managerId = "managerId";
+        HttpSession session = req.getSession();
+        if (session.getAttribute(managerId) == null) {
+            goHome = false;
+        }
+
+        return goHome;
+    }
+
+    @Override
+    public void destroy() {
+    }
 
 }

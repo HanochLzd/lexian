@@ -66,7 +66,7 @@ public class ManagerServiceImpl {
 //    @Cacheable
     public ResultHelper getPrivileges(Integer id, Page page) {
 
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>(2);
         params.put("page", page);
         params.put("id", id);
         List<Privilege> privileges = managerDao.getPrivilegesPage(params);
@@ -82,7 +82,7 @@ public class ManagerServiceImpl {
         return new ResultHelper(Constant.CODE_SUCCESS, managerDao.getUserWithMenus(id));
     }
 
-//    @Cacheable
+    @Cacheable
     public ResultHelper getPrivilegeUrls(Integer id) {
 
         return new ResultHelper(Constant.CODE_SUCCESS, managerDao.getPrivilegeUrls(id));

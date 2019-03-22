@@ -1,6 +1,3 @@
-/**
- * Created by 冯富铭 on 2017/7/6.
- */
 myApp.controller('userController', ['$scope', '$interval', 'httpService', 'srefAndIconFatory',
     function ($scope, $interval, httpService, srefAndIconFatory) {
 
@@ -94,9 +91,9 @@ myApp.controller('queryPrivilegesController', ['$scope', '$timeout', 'httpServic
 
                     $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
                     $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                }else if(-101 == data.code){
-                	alert(data.data);
-                	window.location.href = "index.html";
+                } else if (-101 == data.code) {
+                    alert(data.data);
+                    window.location.href = "index.html";
                 }
             }, function (error) {
                 console.log('getPrivileges error:' + error);
@@ -119,15 +116,15 @@ myApp.controller('queryMenuController', ['$scope', 'httpService', 'srefAndIconFa
         $scope.getMenus = function () {
             httpService.getRequest('manager/getUserWithMenus.do', {})
                 .then(function (data) {
-                    if (1 == data.code) {
+                    if (1 === data.code) {
                         $scope.oData = {
                             aCenterListData: data.data.menus,
                             jSref: srefAndIconFatory.jSref,
                             aIcons: srefAndIconFatory.aIcons
                         };
-                    }else if(-101 == data.code){
-                    	alert(data.data);
-                    	window.location.href = "index.html";
+                    } else if (-101 === data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
                     }
                 }, function (error) {
                     console.log('getUserWithMenus error:' + error);
@@ -162,9 +159,9 @@ myApp.controller('queryUsersController', ['$scope', '$state', '$timeout', 'httpS
 
                         $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
                         $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    }else if(-101 == data.code){
-                    	alert(data.data);
-                    	window.location.href = "index.html";
+                    } else if (-101 == data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
                     }
                 }, function (error) {
                     console.log('getManagers error:' + error);
@@ -357,17 +354,17 @@ myApp.controller('queryRoleController', ['$scope', '$state', '$timeout', 'httpSe
                 }
             })
                 .then(function (data) {
-                	if(1 == data.code){
-                    $scope.aRoles = data.data.data;
+                    if (1 == data.code) {
+                        $scope.aRoles = data.data.data;
 
-                    $scope.nTotalSize = data.data.totalSize;
-                    $scope.nPageNums = data.data.pageNums;
+                        $scope.nTotalSize = data.data.totalSize;
+                        $scope.nPageNums = data.data.pageNums;
 
-                    $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
-                    $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                	}else if(-101 == data.code){
-                    	alert(data.data);
-                    	window.location.href = "index.html";
+                        $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
+                        $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
+                    } else if (-101 == data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
                     }
                 }, function (error) {
                     console.log('getRoles error:' + error);
@@ -491,17 +488,17 @@ myApp.controller('queryVipController', ['$scope', '$timeout', 'httpService', fun
                 }
             })
                 .then(function (data) {
-                	if(1 == data.code){
-                    $scope.aVips = data.data.data;
+                    if (1 == data.code) {
+                        $scope.aVips = data.data.data;
 
-                    $scope.nTotalSize = data.data.totalSize;
-                    $scope.nPageNums = data.data.pageNums;
+                        $scope.nTotalSize = data.data.totalSize;
+                        $scope.nPageNums = data.data.pageNums;
 
-                    $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
-                    $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                	}else if(-101 == data.code){
-                    	alert(data.data);
-                    	window.location.href = "index.html";
+                        $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
+                        $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
+                    } else if (-101 == data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
                     }
                 }, function (error) {
                     console.log('getUsers error:' + error);
@@ -565,9 +562,9 @@ myApp.controller('goodsCategoryController', ['$scope', '$state', '$timeout', 'ht
 
                             $scope.startIndex1 = ($scope.pageNo1 - 1) * $scope.pageSize1 + 1;
                             $scope.lastIndex1 = $scope.startIndex1 + data.data.data.length - 1;
-                        }else if(-101 == data.code){
-                        	alert(data.data);
-                        	window.location.href = "index.html";
+                        } else if (-101 == data.code) {
+                            alert(data.data);
+                            window.location.href = "index.html";
                         }
                     }, function (error) {
                         console.log('getFirstCategoryView error:' + error);
@@ -659,7 +656,7 @@ myApp.controller('goodsCategoryController', ['$scope', '$state', '$timeout', 'ht
         };
     }]);
 // 添加商品分类
-myApp.controller('addCategoryController', ['$scope', '$state', '$filter','$window', 'httpService', function ($scope, $state, $filter,$window, httpService) {
+myApp.controller('addCategoryController', ['$scope', '$state', '$filter', '$window', 'httpService', function ($scope, $state, $filter, $window, httpService) {
     $scope.getAllCategories = function () {
         httpService.getRequest('sort/getCategories.do')
             .then(function (data) {
@@ -687,8 +684,8 @@ myApp.controller('addCategoryController', ['$scope', '$state', '$filter','$windo
         }
     };
     $scope.addCategory = function () {
-        let level = parseInt($scope.categoryLevel)+1;
-    	httpService.getRequest('sort/addCategory.do', {
+        let level = parseInt($scope.categoryLevel) + 1;
+        httpService.getRequest('sort/addCategory.do', {
             params: {
                 categoryName: $scope.categoryName,
                 type: level,
@@ -714,14 +711,14 @@ myApp.controller('changeCategoryController', ['$scope', '$stateParams', '$state'
                 id: $stateParams.id,
                 categoryName: $scope.categoryName,
                 parentId: $stateParams.parentId,
-                type:$stateParams.type
+                type: $stateParams.type
             }
         }).then(function (data) {
             if (1 == data.code) {
                 alert(data.data);
                 $state.go('goods/category');
-            }else if(-3 == data.code){
-            	alert("该分类已存在");
+            } else if (-3 == data.code) {
+                alert("该分类已存在");
             }
         }, function (error) {
             console.log('changeCategory error:' + error);
@@ -757,9 +754,9 @@ myApp.controller('goodsInfoController', ['$scope', '$state', '$timeout', 'httpSe
 
                     $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
                     $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                }else if(-101 == data.code){
-                	alert(data.data);
-                	window.location.href = "index.html";
+                } else if (-101 == data.code) {
+                    alert(data.data);
+                    window.location.href = "index.html";
                 }
             }, function (error) {
                 console.log('getCommodityStoreByStoreNo error: ' + error);
@@ -1014,7 +1011,7 @@ myApp.controller('updateGoodsInfoController', ['$scope', '$state', '$stateParams
             })
         };
         $scope.submitUpdatedInfo = function () {
-            let states = $scope.states? 1:0;
+            let states = $scope.states ? 1 : 0;
             httpService.postRequest('commodity/updateCommodity.do', {
                 id: +($stateParams.id),
                 commodityNo: $scope.commodityNo,
@@ -1068,9 +1065,9 @@ myApp.controller('storeInfoController', ['$scope', '$state', '$timeout', 'httpSe
 
                             $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
                             $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                        }else if(-101 == data.code){
-                        	alert(data.data);
-                        	window.location.href = "index.html";
+                        } else if (-101 == data.code) {
+                            alert(data.data);
+                            window.location.href = "index.html";
                         }
                     }, function (error) {
                         console.log('getCommodityStoreByStoreNo error: ' + error);
@@ -1078,10 +1075,10 @@ myApp.controller('storeInfoController', ['$scope', '$state', '$timeout', 'httpSe
             }, 0);
         };
         $scope.forbiddenStore = function (storeNo, status) {
-            if(1 === status){
-            	status = 2;
-            }else if(2 === status){
-            	status = 1;
+            if (1 === status) {
+                status = 2;
+            } else if (2 === status) {
+                status = 1;
             }
             httpService.getRequest('store/updateStore.do', {params: {storeNo: storeNo, status: status}})
                 .then(function (data) {
@@ -1099,30 +1096,30 @@ myApp.controller('storeInfoController', ['$scope', '$state', '$timeout', 'httpSe
     }]);
 //查看门店地图地址
 myApp.controller('storeMapController', ['$scope', '$stateParams', 'httpService', 'mapService',
-	function ($scope, $stateParams, httpService, mapService){
-		$scope.storeName = $stateParams.storeName;
-		$scope.init = function(){
-			 httpService.getRequest('store/getStoreByStoreNo.do', { params: { storeNo: $stateParams.storeNo }})
-			 	.then(function(data){
-			 			if(1 == data.code){
-			                $scope.storeAddress = data.data.storeAddress;
-			                let oLocation = {
-			                		latitude:data.data.maxLatItude,
-			                		longitude: data.data.maxLongItude,
-			                		storeName: $scope.storeName,
-			                		storeAddress: data.data.storeAddress
-			                }
-			                $scope.mapInit(oLocation)
-			 			}
-		        	}, function(error){
-		        		console.log('map getStoreBy StoreNo error:'+error);
-		        	});
-		      
-		};
-		$scope.mapInit = function(oLocation){
-			mapService.mapInit(oLocation);
-		}
-}]);
+    function ($scope, $stateParams, httpService, mapService) {
+        $scope.storeName = $stateParams.storeName;
+        $scope.init = function () {
+            httpService.getRequest('store/getStoreByStoreNo.do', {params: {storeNo: $stateParams.storeNo}})
+                .then(function (data) {
+                    if (1 == data.code) {
+                        $scope.storeAddress = data.data.storeAddress;
+                        let oLocation = {
+                            latitude: data.data.maxLatItude,
+                            longitude: data.data.maxLongItude,
+                            storeName: $scope.storeName,
+                            storeAddress: data.data.storeAddress
+                        }
+                        $scope.mapInit(oLocation)
+                    }
+                }, function (error) {
+                    console.log('map getStoreBy StoreNo error:' + error);
+                });
+
+        };
+        $scope.mapInit = function (oLocation) {
+            mapService.mapInit(oLocation);
+        }
+    }]);
 
 // 添加门店
 myApp.controller('addStoreController', ['$scope', '$filter', '$state', 'httpService', 'dateTimePickerService',
@@ -1135,7 +1132,7 @@ myApp.controller('addStoreController', ['$scope', '$filter', '$state', 'httpServ
             httpService.getRequest('city/getCities.do', {})
                 .then(function (data) {
                     if (1 == data.code) {
-                    	$scope.aProvince=[];
+                        $scope.aProvince = [];
                         $scope.aProvince = data.data;
                         $scope.selectedProvince = $scope.aProvince[0];
                         $scope.updateProvince();
@@ -1198,8 +1195,8 @@ myApp.controller('addStoreController', ['$scope', '$filter', '$state', 'httpServ
                 if (1 == data.code) {
                     alert(data.data);
                     $state.go('store/info');
-                }else{
-                	alert("该门店编号已存在");
+                } else {
+                    alert("该门店编号已存在");
                 }
             }, function (error) {
                 console.log('addStore error: ' + error);
@@ -1207,8 +1204,8 @@ myApp.controller('addStoreController', ['$scope', '$filter', '$state', 'httpServ
         }
     }]);
 // 修改门店信息
-myApp.controller('updateStoreController', ['$scope', '$filter','$state', '$stateParams', 'httpService', 'dateTimePickerService',
-    function ($scope, $filter,$state, $stateParams, httpService, dateTimePickerService) {
+myApp.controller('updateStoreController', ['$scope', '$filter', '$state', '$stateParams', 'httpService', 'dateTimePickerService',
+    function ($scope, $filter, $state, $stateParams, httpService, dateTimePickerService) {
         $scope.storeNo = $stateParams.storeNo;
         $scope.storeName = $stateParams.storeName;
         $scope.updateStoreFormInit = function () {
@@ -1360,9 +1357,9 @@ myApp.controller('storeGoodsController', ['$scope', '$timeout', 'httpService',
 
                         $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
                         $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    }else if(-101 == data.code){
-                    	alert(data.data);
-                    	window.location.href = "index.html";
+                    } else if (-101 == data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
                     }
                 }, function (error) {
                     console.log('getGoods error: ' + error);
@@ -1427,8 +1424,8 @@ myApp.controller('manageStoreController', ['$scope', '$state', '$stateParams', '
         }
     }]);
 // 注册新商品
-myApp.controller('registerGoodsController', ['$scope','$state', '$stateParams', '$filter', 'httpService', 'getCategoryArrByIdFactory', 'isCheckFactory',
-    function ($scope,$state, $stateParams, $filter, httpService, getCategoryArrByIdFactory, isCheckFactory) {
+myApp.controller('registerGoodsController', ['$scope', '$state', '$stateParams', '$filter', 'httpService', 'getCategoryArrByIdFactory', 'isCheckFactory',
+    function ($scope, $state, $stateParams, $filter, httpService, getCategoryArrByIdFactory, isCheckFactory) {
         $scope.selctedFilter = 'name';
         $scope.filterStr = '';
         $scope.filterTypes = [{chName: '商品名称', filterName: 'name'}, {chName: '商品编号', filterName: 'commodityNo'}];
@@ -1530,7 +1527,7 @@ myApp.controller('registerGoodsController', ['$scope','$state', '$stateParams', 
                 }
             }).then(function (data) {
                 if (1 == data.code) {
-                	alert("注册成功");
+                    alert("注册成功");
                     $state.go('store/goods/manageStore', {storeNo: $scope.storeNo, storeName: $scope.storeName});
                 }
             }, function (error) {
@@ -1602,17 +1599,17 @@ myApp.controller('orderListController', ['$scope', '$filter', '$timeout', 'order
             $timeout(function () {
                 orderService.getOrdersByState(0, $scope.pageNo, $scope.pageSize)
                     .then(function (data) {
-                    	if(1 == data.code){
-                        $scope.aOrderLists = data.data.data;
+                        if (1 == data.code) {
+                            $scope.aOrderLists = data.data.data;
 
-                        $scope.nTotalSize = data.data.totalSize;
-                        $scope.nPageNums = data.data.pageNums;
+                            $scope.nTotalSize = data.data.totalSize;
+                            $scope.nPageNums = data.data.pageNums;
 
-                        $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
-                        $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    	}else if(-101 == data.code){
-                        	alert(data.data);
-                        	window.location.href = "index.html";
+                            $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
+                            $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
+                        } else if (-101 == data.code) {
+                            alert(data.data);
+                            window.location.href = "index.html";
                         }
                     }, function (error) {
                         console.log('getOrderss error' + error);
@@ -1646,17 +1643,17 @@ myApp.controller('orderUnpaidController', ['$scope', '$filter', '$timeout', 'ord
             $timeout(function () {
                 orderService.getOrdersByState(1, $scope.pageNo, $scope.pageSize)
                     .then(function (data) {
-                    	if(1 == data.code){
-                        $scope.aUnpaidLists = data.data.data;
+                        if (1 == data.code) {
+                            $scope.aUnpaidLists = data.data.data;
 
-                        $scope.nTotalSize = data.data.totalSize;
-                        $scope.nPageNums = data.data.pageNums;
+                            $scope.nTotalSize = data.data.totalSize;
+                            $scope.nPageNums = data.data.pageNums;
 
-                        $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
-                        $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    	}else if(-101 == data.code){
-                        	alert(data.data);
-                        	window.location.href = "index.html";
+                            $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
+                            $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
+                        } else if (-101 == data.code) {
+                            alert(data.data);
+                            window.location.href = "index.html";
                         }
                     }, function (error) {
                         console.log('orderUnpaid error' + error);
@@ -1689,17 +1686,17 @@ myApp.controller('orderPaidController', ['$scope', '$filter', '$timeout', 'httpS
             $timeout(function () {
                 orderService.getOrdersByState(2, $scope.pageNo, $scope.pageSize)
                     .then(function (data) {
-                    	if(1 == data.code){
-                        $scope.aPaidLists = data.data.data;
+                        if (1 == data.code) {
+                            $scope.aPaidLists = data.data.data;
 
-                        $scope.nTotalSize = data.data.totalSize;
-                        $scope.nPageNums = data.data.pageNums;
+                            $scope.nTotalSize = data.data.totalSize;
+                            $scope.nPageNums = data.data.pageNums;
 
-                        $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
-                        $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    	}else if(-101 == data.code){
-                        	alert(data.data);
-                        	window.location.href = "index.html";
+                            $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
+                            $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
+                        } else if (-101 == data.code) {
+                            alert(data.data);
+                            window.location.href = "index.html";
                         }
                     }, function (error) {
                         console.log('orderUnpaid error' + error);
@@ -1743,17 +1740,17 @@ myApp.controller('orderDeliverController', ['$scope', '$filter', '$timeout', 'or
             $timeout(function () {
                 orderService.getOrdersByState(3, $scope.pageNo, $scope.pageSize)
                     .then(function (data) {
-                    	if(1 == data.code){
-                        $scope.aDeliverLists = data.data.data;
+                        if (1 == data.code) {
+                            $scope.aDeliverLists = data.data.data;
 
-                        $scope.nTotalSize = data.data.totalSize;
-                        $scope.nPageNums = data.data.pageNums;
+                            $scope.nTotalSize = data.data.totalSize;
+                            $scope.nPageNums = data.data.pageNums;
 
-                        $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
-                        $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    	}else if(-101 == data.code){
-                        	alert(data.data);
-                        	window.location.href = "index.html";
+                            $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
+                            $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
+                        } else if (-101 == data.code) {
+                            alert(data.data);
+                            window.location.href = "index.html";
                         }
                     }, function (error) {
                         console.log('orderUnpaid error' + error);
@@ -1786,17 +1783,17 @@ myApp.controller('orderCompleteController', ['$scope', '$filter', '$timeout', 'o
             $timeout(function () {
                 orderService.getOrdersByState(4, $scope.pageNo, $scope.pageSize)
                     .then(function (data) {
-                    	if(1 == data.code){
-                        $scope.aCompleteLists = data.data.data;
+                        if (1 == data.code) {
+                            $scope.aCompleteLists = data.data.data;
 
-                        $scope.nTotalSize = data.data.totalSize;
-                        $scope.nPageNums = data.data.pageNums;
+                            $scope.nTotalSize = data.data.totalSize;
+                            $scope.nPageNums = data.data.pageNums;
 
-                        $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
-                        $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    	}else if(-101 == data.code){
-                        	alert(data.data);
-                        	window.location.href = "index.html";
+                            $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
+                            $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
+                        } else if (-101 == data.code) {
+                            alert(data.data);
+                            window.location.href = "index.html";
                         }
                     }, function (error) {
                         console.log('orderUnpaid error' + error);
@@ -1850,9 +1847,9 @@ myApp.controller('activitySpecifyController', ['$scope', '$state', '$timeout', '
 
                         $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
                         $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    }else if(-101 == data.code){
-                    	alert(data.data);
-                    	window.location.href = "index.html";
+                    } else if (-101 == data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
                     }
                 }, function (error) {
                     console.log('getSpecial error' + error);
@@ -1949,7 +1946,7 @@ myApp.controller('getSpecialCommoditiesController', ['$scope', '$stateParams', '
             $scope.commodityNo = '';
             httpService.getRequest('sort/getCategories.do')
                 .then(function (data) {
-                        if (1 == data.code) {
+                        if (1 === data.code) {
                             $scope.firstCategories = $filter('filter')(data.data, {'type': 1});
                             $scope.secondTypeCategories = $filter('filter')(data.data, {'type': 2});
                             $scope.thirdTypeCategories = $filter('filter')(data.data, {'type': 3});
@@ -2037,86 +2034,86 @@ myApp.controller('goodsStatisticsController', ['$scope', '$state', 'httpService'
 myApp.controller('overallStatisticsController', ['$scope', '$filter', 'httpService', 'diagramService',
     function ($scope, $filter, httpService, diagramService) {
 
-    $scope.selectedUrl = 'statistics/getCommodityBuyStatistics.do';
-    $scope.selectedTimeType = 1;
-    $scope.selectedDiagramType = 'line';
+        $scope.selectedUrl = 'statistics/getCommodityBuyStatistics.do';
+        $scope.selectedTimeType = 1;
+        $scope.selectedDiagramType = 'line';
 
-    $scope.chartInit = function(){
-        // 基于准备好的dom，初始化echarts实例
-        $scope.chart = echarts.init(document.getElementById('chart'));
-        $scope.getStatisticsData();
-    };
-    $scope.getStatisticsData = function (){
-        httpService.getRequest($scope.selectedUrl, {params: {type: $scope.selectedTimeType}})
-            .then(function(data){
-                if(1==data.code){
-                    $scope.refreshArr(data);
-                    $scope.refreshDiagram();
-                }else if(-101 == data.code){
-                	alert(data.data);
-                	window.location.href = "index.html";
-                }
-            }, function (error) {
-                console.log($scope.selectedUrl+error);
-            });
-    };
-        $scope.refreshArr = function(data){
+        $scope.chartInit = function () {
+            // 基于准备好的dom，初始化echarts实例
+            $scope.chart = echarts.init(document.getElementById('chart'));
+            $scope.getStatisticsData();
+        };
+        $scope.getStatisticsData = function () {
+            httpService.getRequest($scope.selectedUrl, {params: {type: $scope.selectedTimeType}})
+                .then(function (data) {
+                    if (1 == data.code) {
+                        $scope.refreshArr(data);
+                        $scope.refreshDiagram();
+                    } else if (-101 == data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
+                    }
+                }, function (error) {
+                    console.log($scope.selectedUrl + error);
+                });
+        };
+        $scope.refreshArr = function (data) {
             $scope.aObjPicData = $filter('pieChartFilter')(data.data);
             $scope.aNamesLineData = $filter('lineChartNameFilter')(data.data);
             $scope.aCountLineData = $filter('lineChartCountFilter')(data.data);
         };
-    // 获取购买次数
-    $scope.getBuyStatistics = function($event){
-        angular.element('.dataMenu li').removeClass('active');
-        $($event.target).parent().addClass('active');
-        $scope.selectedUrl='statistics/getCommodityBuyStatistics.do';
-        $scope.getStatisticsData();
-    };
-    // 获取收藏次数
-    $scope.getCollectionStatistics = function($event){
-        angular.element('.dataMenu li').removeClass('active');
-        $($event.target).parent().addClass('active');
-        $scope.selectedUrl='statistics/getCommodityCollectionStatistics.do';
-        $scope.getStatisticsData();
-    };
-    // 获取浏览次数
-    $scope.getSurfStatistics = function($event){
-        angular.element('.dataMenu li').removeClass('active');
-        $($event.target).parent().addClass('active');
-        $scope.selectedUrl='statistics/getCommodityBrowseStatistics.do';
-        $scope.getStatisticsData();
-    };
-    $scope.timeTypeChange = function(){
-        $scope.getStatisticsData();
-    };
-    $scope.changeDiagramType = function(newType, $event){
-        angular.element('.showOption button').removeClass('active');
-        $event.target.classList.add('active');
-        $scope.selectedDiagramType = newType;
-        $scope.refreshDiagram();
-    };
-    $scope.refreshDiagram = function(){
-        switch ($scope.selectedDiagramType){
-            case 'line':
-                $scope.turnToLine();
-                break;
-            case 'pie':
-                $scope.turnToPie();
-                break;
-            default:
-                alert('未知的图表类型');
+        // 获取购买次数
+        $scope.getBuyStatistics = function ($event) {
+            angular.element('.dataMenu li').removeClass('active');
+            $($event.target).parent().addClass('active');
+            $scope.selectedUrl = 'statistics/getCommodityBuyStatistics.do';
+            $scope.getStatisticsData();
+        };
+        // 获取收藏次数
+        $scope.getCollectionStatistics = function ($event) {
+            angular.element('.dataMenu li').removeClass('active');
+            $($event.target).parent().addClass('active');
+            $scope.selectedUrl = 'statistics/getCommodityCollectionStatistics.do';
+            $scope.getStatisticsData();
+        };
+        // 获取浏览次数
+        $scope.getSurfStatistics = function ($event) {
+            angular.element('.dataMenu li').removeClass('active');
+            $($event.target).parent().addClass('active');
+            $scope.selectedUrl = 'statistics/getCommodityBrowseStatistics.do';
+            $scope.getStatisticsData();
+        };
+        $scope.timeTypeChange = function () {
+            $scope.getStatisticsData();
+        };
+        $scope.changeDiagramType = function (newType, $event) {
+            angular.element('.showOption button').removeClass('active');
+            $event.target.classList.add('active');
+            $scope.selectedDiagramType = newType;
+            $scope.refreshDiagram();
+        };
+        $scope.refreshDiagram = function () {
+            switch ($scope.selectedDiagramType) {
+                case 'line':
+                    $scope.turnToLine();
+                    break;
+                case 'pie':
+                    $scope.turnToPie();
+                    break;
+                default:
+                    alert('未知的图表类型');
+            }
+        };
+        $scope.turnToLine = function () {
+            let option = diagramService.getLineOption($scope.aNamesLineData, $scope.aCountLineData);
+            $scope.chart.setOption(option, true);
+        };
+        $scope.turnToPie = function () {
+            let option = diagramService.getPieOption($scope.aObjPicData);
+            $scope.chart.setOption(option, true);
         }
-    };
-    $scope.turnToLine = function () {
-        let option = diagramService.getLineOption($scope.aNamesLineData, $scope.aCountLineData);
-        $scope.chart.setOption(option, true);
-    };
-    $scope.turnToPie = function () {
-        let option = diagramService.getPieOption($scope.aObjPicData);
-        $scope.chart.setOption(option, true);
-    }
 
-}]);
+    }]);
 
 // 数据统计-门店概况
 myApp.controller('storeStatisticsController', ['$scope', '$timeout', 'httpService',
@@ -2145,9 +2142,9 @@ myApp.controller('storeStatisticsController', ['$scope', '$timeout', 'httpServic
 
                         $scope.startIndex = ($scope.pageNo - 1) * $scope.pageSize + 1;
                         $scope.lastIndex = $scope.startIndex + data.data.data.length - 1;
-                    }else if(-101 == data.code){
-                    	alert(data.data);
-                    	window.location.href = "index.html";
+                    } else if (-101 == data.code) {
+                        alert(data.data);
+                        window.location.href = "index.html";
                     }
                 }, function (error) {
                     console.log('getGoods error: ' + error);
@@ -2164,52 +2161,57 @@ myApp.controller('specificStoreStatisticsController', ['$scope', '$stateParams',
         $scope.selectedTimeType = 1;
         $scope.selectedDiagramType = 'line';
 
-        $scope.chartInit = function(){
+        $scope.chartInit = function () {
             // 基于准备好的dom，初始化echarts实例
             $scope.chart = echarts.init(document.getElementById('chart'));
             $scope.getStatisticsData();
         };
-        $scope.getStatisticsData = function (){
-            httpService.getRequest($scope.selectedUrl, {params: {storeNo: $scope.storeNo, type: $scope.selectedTimeType}})
-                .then(function(data){
-                    if(1==data.code){
+        $scope.getStatisticsData = function () {
+            httpService.getRequest($scope.selectedUrl, {
+                params: {
+                    storeNo: $scope.storeNo,
+                    type: $scope.selectedTimeType
+                }
+            })
+                .then(function (data) {
+                    if (1 == data.code) {
                         $scope.refreshArr(data);
                         $scope.refreshDiagram();
                     }
                 }, function (error) {
-                    console.log($scope.selectedUrl+error);
+                    console.log($scope.selectedUrl + error);
                 });
         };
-        $scope.refreshArr = function(data){
+        $scope.refreshArr = function (data) {
             $scope.aObjPicData = $filter('pieChartFilter')(data.data);
             $scope.aNamesLineData = $filter('lineChartNameFilter')(data.data);
             $scope.aCountLineData = $filter('lineChartCountFilter')(data.data);
         };
         // 获取购买次数
-        $scope.getBuyStatistics = function($event){
+        $scope.getBuyStatistics = function ($event) {
             angular.element('.dataMenu li').removeClass('active');
             $($event.target).parent().addClass('active');
-            $scope.selectedUrl='statistics/getStoreCommodityBuyStatistics.do';
+            $scope.selectedUrl = 'statistics/getStoreCommodityBuyStatistics.do';
             $scope.getStatisticsData();
         };
         // 获取收藏次数
-        $scope.getCollectionStatistics = function($event){
+        $scope.getCollectionStatistics = function ($event) {
             angular.element('.dataMenu li').removeClass('active');
             $($event.target).parent().addClass('active');
-            $scope.selectedUrl='statistics/getStoreCommodityCollectionStatistics.do';
+            $scope.selectedUrl = 'statistics/getStoreCommodityCollectionStatistics.do';
             $scope.getStatisticsData();
         };
-        $scope.timeTypeChange = function(){
+        $scope.timeTypeChange = function () {
             $scope.getStatisticsData();
         };
-        $scope.changeDiagramType = function(newType, $event){
+        $scope.changeDiagramType = function (newType, $event) {
             angular.element('.showOption button').removeClass('active');
             $event.target.classList.add('active');
             $scope.selectedDiagramType = newType;
             $scope.refreshDiagram();
         };
-        $scope.refreshDiagram = function(){
-            switch ($scope.selectedDiagramType){
+        $scope.refreshDiagram = function () {
+            switch ($scope.selectedDiagramType) {
                 case 'line':
                     $scope.turnToLine();
                     break;

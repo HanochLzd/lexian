@@ -9,9 +9,7 @@ import javax.validation.Valid;
 
 import com.lexian.manager.authority.service.impl.ManagerServiceImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.lexian.manager.authority.bean.Manager;
@@ -39,8 +37,11 @@ public class ManagerController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "signIn.do")
-    public ResultHelper signIn(String name, String password, HttpSession session, Map<String, Object> model) {
+    @RequestMapping(value = "signIn.do", method = RequestMethod.POST)
+    public ResultHelper signIn(
+            @RequestParam("name") String name,
+            @RequestParam("password") String password,
+            HttpSession session, Map<String, Object> model) {
 
         ResultHelper result = managerService.signIn(name, password);
 
@@ -79,7 +80,6 @@ public class ManagerController {
      * @param model
      * @return
      */
-    // manager/updateManagerPassword.do?password=1&newPass=2
     @ResponseBody
     @RequestMapping("updateManagerPassword.do")
     public ResultHelper updateManagerPassword(@Valid Manager manager, String newPass, Map<String, Object> model) {
@@ -94,7 +94,6 @@ public class ManagerController {
      * @param model
      * @return
      */
-    //manager/getPrivileges.do?pageNo=2
     @ResponseBody
     @RequestMapping("getPrivileges.do")
     public ResultHelper getPrivileges(Map<String, Object> model, Page page) {
@@ -108,7 +107,6 @@ public class ManagerController {
      * @param model
      * @return
      */
-    //manager/getUserWithMenus.do
     @ResponseBody
     @RequestMapping("getUserWithMenus.do")
     public ResultHelper getUserWithMenus(Map<String, Object> model) {
@@ -121,7 +119,6 @@ public class ManagerController {
      * @param model
      * @return
      */
-    //manager/getMenus.do
     @ResponseBody
     @RequestMapping("getMenus.do")
     public ResultHelper gethMenus(Map<String, Object> model, Page page) {

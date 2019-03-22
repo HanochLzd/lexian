@@ -86,15 +86,27 @@
     <filter>
         <filter-name>CheckLoginFilter</filter-name>
         <filter-class>com.lexian.filter.CheckLoginFilter</filter-class>
-        <init-param>
-            <param-name></param-name>
-            <param-value></param-value>
-        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>CheckLoginFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
+
+
+    <!-- 配置权限过滤器 -->
+    <!--<filter>-->
+        <!--<filter-name>CheckPrivilegeFilter</filter-name>-->
+        <!--<filter-class>com.lexian.filter.CheckPrivilegeFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>action</param-name>-->
+            <!--<param-value>action</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>CheckPrivilegeFilter</filter-name>-->
+        <!--<url-pattern>*.do</url-pattern>-->
+    <!--</filter-mapping>-->
 
 
     <listener>
