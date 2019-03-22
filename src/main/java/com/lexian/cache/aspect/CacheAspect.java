@@ -10,11 +10,13 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * @Author :lzd
@@ -30,6 +32,9 @@ public class CacheAspect {
 
     @Resource
     private RedisCacheService redisCacheService;
+
+    @Resource
+    private ThreadPoolTaskExecutor riskExecutor;
 
     /**
      * 缓存切入点
@@ -110,4 +115,18 @@ public class CacheAspect {
 
         return method.getAnnotation(Cacheable.class);
     }
+
+//    public void update() {
+//        //异步刷新
+//        try {
+//            riskExecutor.execute(() -> {
+//                for (Map.Entry<String, Boolean> entry : newWhitelistMap.entrySet()) {
+//                    String cacheKey = buildWhitelistCacheKey(entry.getKey(), type, application);
+//                    whitelistCache.put(cacheKey, entry.getValue());
+//                }
+//            });
+//        } catch (Exception e) {
+//            LOGGER.error("白名单缓存失败:(", e);
+//        }
+//    }
 }
