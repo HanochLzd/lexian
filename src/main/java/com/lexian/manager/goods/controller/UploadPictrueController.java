@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.lexian.utils.UrlConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.lexian.utils.Constant;
-import com.lexian.utils.UrlContant;
 import com.lexian.web.ResultHelper;
 import com.lexian.web.UploadingImageUtil;
 
@@ -39,7 +39,7 @@ public class UploadPictrueController {
                 MultipartFile file = multiRequest.getFile(ite.next());
                 CommonsMultipartFile fi = (CommonsMultipartFile) file;
                 String newName = UploadingImageUtil.upload(fi);
-                newPictureUrl = UrlContant.qiNiuUrl + "/" + newName;
+                newPictureUrl = UrlConstant.QI_NIU_URL + "/" + newName;
             }
         }
 

@@ -16,16 +16,21 @@ import org.hibernate.validator.constraints.Range;
 public class Manager {
 
     private int id;
+
     @Pattern(regexp = "^([1-9][0-9]{4,19})$")
     private String name;
+
     @Pattern(regexp = "^[a-zA-Z0-9]{6,20}$")
     private String password;
-    //	@Pattern(regexp="^[0-9a-zA-Z\u4e00-\u9fa5]{1,150}$")
+
     private String info;
+
     @Null
     private Date createTime;
+
     @Null
     private Date updateTime;
+
     @Range(max = 1, min = 0)
     private Integer status;
 

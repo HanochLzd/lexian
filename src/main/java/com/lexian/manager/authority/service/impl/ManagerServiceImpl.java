@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lexian.cache.annotation.Cacheable;
+import com.lexian.utils.UrlConstant;
 import org.springframework.stereotype.Service;
 
 import com.lexian.manager.authority.bean.Manager;
@@ -15,9 +16,7 @@ import com.lexian.manager.authority.bean.Privilege;
 import com.lexian.manager.authority.bean.RoleManager;
 import com.lexian.manager.authority.dao.ManagerDao;
 import com.lexian.manager.authority.dao.RoleManagerDao;
-import com.lexian.manager.authority.service.ManagerService;
 import com.lexian.utils.Constant;
-import com.lexian.utils.UrlContant;
 import com.lexian.web.Page;
 import com.lexian.web.ResultHelper;
 
@@ -34,15 +33,6 @@ public class ManagerServiceImpl {
 
     @Resource
     private RoleManagerDao roleManagerDao;
-
-    public ManagerDao getManagerDao() {
-        return managerDao;
-    }
-
-    public void setManagerDao(ManagerDao managerDao) {
-        this.managerDao = managerDao;
-    }
-
 
     public ResultHelper signIn(String name, String password) {
 
@@ -63,7 +53,7 @@ public class ManagerServiceImpl {
         return result;
     }
 
-//    @Cacheable
+    //    @Cacheable
     public ResultHelper getPrivileges(Integer id, Page page) {
 
         Map<String, Object> params = new HashMap<>(2);
@@ -72,9 +62,7 @@ public class ManagerServiceImpl {
         List<Privilege> privileges = managerDao.getPrivilegesPage(params);
         page.setData(privileges);
 
-        ResultHelper result = new ResultHelper(Constant.CODE_SUCCESS, page);
-
-        return result;
+        return new ResultHelper(Constant.CODE_SUCCESS, page);
     }
 
     @Cacheable
@@ -141,7 +129,7 @@ public class ManagerServiceImpl {
 
     }
 
-//    @Cacheable
+    //    @Cacheable
     public ResultHelper getManagers(Page page) {
 
         Map<String, Object> params = new HashMap<>();
@@ -149,9 +137,7 @@ public class ManagerServiceImpl {
         List<Manager> privileges = managerDao.getManagersPage(params);
         page.setData(privileges);
 
-        ResultHelper result = new ResultHelper(Constant.CODE_SUCCESS, page);
-
-        return result;
+        return new ResultHelper(Constant.CODE_SUCCESS, page);
 
     }
 
@@ -178,14 +164,14 @@ public class ManagerServiceImpl {
     @Cacheable
     public ResultHelper getMenus(Integer id, Page page) {
 
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>(2);
         params.put("page", page);
         params.put("id", id);
         List<Menu> menus = managerDao.getMenusPage(params);
         page.setData(menus);
 
         for (Menu menu : menus) {
-            menu.setBackUrl(UrlContant.qiNiuUrl + "/" + menu.getBackUrl());
+            menu.setBackUrl(UrlConstant.QI_NIU_URL + "/" + menu.getBackUrl());
         }
 
         return new ResultHelper(Constant.CODE_SUCCESS, page);

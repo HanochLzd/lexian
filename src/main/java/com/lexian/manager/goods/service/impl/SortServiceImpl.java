@@ -1,6 +1,3 @@
-/**
- * Copyright 2017  Chinasofti , Inc. All rights reserved.
- */
 package com.lexian.manager.goods.service.impl;
 
 import java.util.HashMap;
@@ -19,14 +16,9 @@ import com.lexian.web.ResultHelper;
 
 import javax.annotation.Resource;
 
+
 /**
- * <p>Title: 乐鲜生活</p>
- * <p>Description: 乐鲜生活购物系统</p>
- * <p>Copyright: Copyright (c) 200x</p>
- * <p>Company: 中软国际</p>
- *
- * @author 陈浩
- * @version 1.0
+ * @author Administrator
  */
 @Service
 public class SortServiceImpl implements SortService {
@@ -34,24 +26,14 @@ public class SortServiceImpl implements SortService {
     @Resource
     private SortDao sortDao;
 
-
-    public SortDao getSortDao() {
-        return sortDao;
-    }
-
-    public void setSortDao(SortDao sortDao) {
-        this.sortDao = sortDao;
-    }
-
     @Override
     public ResultHelper getAllCategories(Page page) {
         Map<String, Object> params = new HashMap<>();
         params.put("page", page);
         List<Category> orderssWithStore = sortDao.getAllCategoriesPage(params);
         page.setData(orderssWithStore);
-        ResultHelper result = new ResultHelper(Constant.CODE_SUCCESS, page);
 
-        return result;
+        return new ResultHelper(Constant.CODE_SUCCESS, page);
     }
 
     @Override

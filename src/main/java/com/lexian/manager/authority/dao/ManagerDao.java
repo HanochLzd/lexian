@@ -16,7 +16,6 @@ public interface ManagerDao {
 
     Manager getManagerByNameAndPassword(@Param("name") String name, @Param("password") String password);
 
-
     List<Privilege> getPrivilegesPage(Map<String, Object> params);
 
     Manager getUserWithMenus(int id);
@@ -29,12 +28,9 @@ public interface ManagerDao {
 
     List<String> getPrivilegeUrls(int id);
 
-
     void deleteManagerById(int id);
 
-
     Integer verifyPassword(@Param("id") Integer id, @Param("password") String password);
-
 
     List<Menu> getMenusPage(Map<String, Object> params);
 
