@@ -1,4 +1,4 @@
-package com.lexian.log.log.annotation;
+package com.lexian.log.annotation;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 

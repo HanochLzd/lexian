@@ -33,8 +33,8 @@ public class CacheAspect {
     @Resource
     private RedisCacheService redisCacheService;
 
-    @Resource
-    private ThreadPoolTaskExecutor riskExecutor;
+//    @Resource
+//    private ThreadPoolTaskExecutor riskExecutor;
 
     /**
      * 缓存切入点
