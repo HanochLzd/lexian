@@ -12,6 +12,9 @@ import com.lexian.manager.vip.service.UserService;
 import com.lexian.web.Page;
 import com.lexian.web.ResultHelper;
 
+/**
+ * @author luozidong
+ */
 @Controller
 @RequestMapping("user")
 public class UserController {
