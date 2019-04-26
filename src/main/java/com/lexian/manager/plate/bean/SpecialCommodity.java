@@ -52,4 +52,15 @@ public class SpecialCommodity {
     public void setSpecialId(int specialId) {
         this.specialId = specialId;
     }
+
+    @Override
+    public String toString() {
+        return "SpecialCommodity{" +
+                "id=" + id +
+                ", commodityNo='" + commodityNo + '\'' +
+                ", specialId=" + specialId +
+                ", name='" + name + '\'' +
+                ", pictureUrl='" + pictureUrl + '\'' +
+                '}';
+    }
 }

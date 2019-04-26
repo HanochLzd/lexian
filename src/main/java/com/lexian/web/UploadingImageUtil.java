@@ -27,7 +27,7 @@ public class UploadingImageUtil {
     /**
      * 构造一个带指定Zone对象的配置类
      */
-    private static Configuration cfg = new Configuration(Zone.zone2());
+    private static Configuration cfg = new Configuration(Zone.zone0());
 
     /**
      * ...其他参数参考类注释
@@ -36,10 +36,10 @@ public class UploadingImageUtil {
     /**
      * ...生成上传凭证，然后准备上传
      */
-    private static final String ACCESS_KEY = "a5raC1U1P_Sap5M3GDFdPjPIgXovBNMKJAwJY-05";
-    private static final String SECRET_KEY = "s32eI0n9vL3PpggqpMZCbEr6T4kEEaDNMQFY4MX4";
+    private static final String ACCESS_KEY = "tVPLHCcsp3MW1lmJf06Kn0eXsOojeR23VXrFI4VX";
+    private static final String SECRET_KEY = "ssxqrjrY916T5iZt6beYpVkBNMXRbP4wfgbPPUD2";
 
-    private static final String BUCKET = "lexianmarket";// 上传到指定的七牛云存储的一个空间中
+    private static final String BUCKET = "lexian";// 上传到指定的七牛云存储的一个空间中
     private static String key = null;// 默认不指定key的情况下，以文件内容的hash值作为文件名（上传后的文件名）
 
     public static String upload(CommonsMultipartFile file) {

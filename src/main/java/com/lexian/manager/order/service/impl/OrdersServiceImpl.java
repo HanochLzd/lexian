@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.lexian.cache.annotation.Cacheable;
 import com.lexian.utils.UrlConstant;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +24,16 @@ import javax.annotation.Resource;
  * @author Administrator
  */
 @Service
-public class OrdersServiceImpl implements OrdersService {
+public class OrdersServiceImpl {
 
     @Resource
     private OrdersDao ordersDao;
 
-    @Override
+
+    @Cacheable
     public ResultHelper getOrderss(Page page, Integer state) {
 
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>(2);
         params.put("page", page);
 
         if (state != null) {
@@ -44,7 +46,7 @@ public class OrdersServiceImpl implements OrdersService {
         return new ResultHelper(Constant.CODE_SUCCESS, page);
     }
 
-    @Override
+
     public ResultHelper getOrderDetail(int id) {
         Orders orders = ordersDao.getOrdersWithUserAndOrderItemsStore(id);
 
@@ -56,7 +58,7 @@ public class OrdersServiceImpl implements OrdersService {
         return new ResultHelper(Constant.CODE_SUCCESS, orders);
     }
 
-    @Override
+
     public ResultHelper updateOrders(Orders orders) {
 
         ordersDao.updateOrders(orders);
@@ -64,7 +66,7 @@ public class OrdersServiceImpl implements OrdersService {
         return new ResultHelper(Constant.CODE_SUCCESS);
     }
 
-    @Override
+
     public ResultHelper getOrderssByDate(Integer state, String start, String end, Page page) {
 
         Map<String, Object> params = new HashMap<>();

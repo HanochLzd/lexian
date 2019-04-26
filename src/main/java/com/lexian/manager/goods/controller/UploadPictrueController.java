@@ -6,6 +6,8 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 
 import com.lexian.utils.UrlConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +27,8 @@ import com.lexian.web.UploadingImageUtil;
 @RequestMapping("uploadPicture")
 public class UploadPictrueController {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(UploadPictrueController.class);
+
     @ResponseBody
     @RequestMapping("uploadSinglePic.do")
     public ResultHelper uploadMainPic(HttpServletRequest request) throws IOException {
@@ -40,6 +44,7 @@ public class UploadPictrueController {
                 CommonsMultipartFile fi = (CommonsMultipartFile) file;
                 String newName = UploadingImageUtil.upload(fi);
                 newPictureUrl = UrlConstant.QI_NIU_URL + "/" + newName;
+                LOGGER.info("upload picture url - {}", newPictureUrl);
             }
         }
 

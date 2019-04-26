@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.lexian.cache.annotation.Cacheable;
 import com.lexian.utils.UrlConstant;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,13 @@ import javax.annotation.Resource;
  * @author Administrator
  */
 @Service
-public class CommodityServiceImpl implements CommodityService {
+public class CommodityServiceImpl {
 
     @Resource
     private CommodityDao commodityDao;
 
-    @Override
+
+    @Cacheable
     public ResultHelper getCommodities(Page page) {
 
         Map<String, Object> params = new HashMap<>();
@@ -43,7 +45,7 @@ public class CommodityServiceImpl implements CommodityService {
         return new ResultHelper(Constant.CODE_SUCCESS, page);
     }
 
-    @Override
+
     public ResultHelper getCommodityByCategoryId(int categoryId) {
 
         List<Commodity> list = commodityDao.getCommodityByCategoryId(categoryId);
@@ -51,7 +53,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     }
 
-    @Override
+
     public ResultHelper getCommodityByCommodityNo(String commodityNo) {
         Commodity commodity = commodityDao.getCommodityByCommodityNo(commodityNo);
         if (commodity != null) {
@@ -61,12 +63,12 @@ public class CommodityServiceImpl implements CommodityService {
         }
     }
 
-    @Override
+
     public ResultHelper updateCommodity(Commodity commodity) {
         Date time = new Date();
         commodity.setUpdateTime(time);
         if (commodity.getPictureUrl() != null) {
-            commodity.setPictureUrl(commodity.getPictureUrl().replace("http://osnk57csd.bkt.clouddn.com", ""));
+            commodity.setPictureUrl(commodity.getPictureUrl().replace(UrlConstant.QI_NIU_URL, ""));
         }
         commodityDao.deleteCommodityPicture(commodity.getCommodityNo());
         commodityDao.deleteCommoditySpec(commodity.getCommodityNo());
@@ -78,7 +80,7 @@ public class CommodityServiceImpl implements CommodityService {
         if (listCommodityPicture.size() != 0) {
             for (String string : listCommodityPicture) {
                 commodityDao.addCommodityPicture(commodity.getCommodityNo(),
-                        string.replace("http://osnk57csd.bkt.clouddn.com", ""));
+                        string.replace(UrlConstant.QI_NIU_URL, ""));
             }
         } else {
             commodityDao.addCommodityPicture(commodity.getCommodityNo(), null);
@@ -103,7 +105,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     }
 
-    @Override
+
     public ResultHelper addCommodity(Commodity commodity) {
         Commodity com = commodityDao.getCommodityByCommodityNo(commodity.getCommodityNo());
         if (com != null) {
@@ -112,6 +114,7 @@ public class CommodityServiceImpl implements CommodityService {
 
             Date time = new Date();
             commodity.setCreateTime(time);
+            commodity.setUpdateTime(time);
             commodity.setStates(1);
             commodityDao.addCommodity(commodity);
             commodityDao.addCommodityPicture(commodity.getCommodityNo(), commodity.getPictureUrl());
@@ -123,7 +126,7 @@ public class CommodityServiceImpl implements CommodityService {
         }
     }
 
-    @Override
+
     public ResultHelper getCommodityById(int id) {
         Commodity commodity = commodityDao.getCommodityById(id);
         if (commodity != null) {
@@ -150,13 +153,13 @@ public class CommodityServiceImpl implements CommodityService {
 
     }
 
-    @Override
+
     public ResultHelper updateCommodityPicture(String commodityNo, String pictureUrl) {
         commodityDao.addCommodityPicture(commodityNo, pictureUrl);
         return new ResultHelper(Constant.CODE_SUCCESS);
     }
 
-    @Override
+
     public ResultHelper deleteCommodityPictrue(String commodityNo) {
         commodityDao.deleteCommodityPicture(commodityNo);
         return new ResultHelper(Constant.CODE_SUCCESS);

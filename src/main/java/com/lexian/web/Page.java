@@ -1,5 +1,7 @@
 package com.lexian.web;
 
+import java.util.Objects;
+
 public class Page {
 
 
@@ -67,5 +69,24 @@ public class Page {
         this.totalSize = totalSize;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Page page = (Page) o;
+        return pageSize == page.pageSize &&
+                totalSize == page.totalSize &&
+                pageNums == page.pageNums &&
+                pageNo.equals(page.pageNo) &&
+                Objects.equals(data, page.data);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(pageNo, pageSize, totalSize, pageNums, data);
+    }
 }

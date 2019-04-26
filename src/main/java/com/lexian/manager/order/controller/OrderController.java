@@ -2,6 +2,7 @@ package com.lexian.manager.order.controller;
 
 import javax.validation.Valid;
 
+import com.lexian.manager.order.service.impl.OrdersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import com.lexian.web.ResultHelper;
 public class OrderController {
 
     @Autowired
-    private OrdersService ordersService;
+    private OrdersServiceImpl ordersService;
 
 
     @ResponseBody

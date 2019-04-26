@@ -2,6 +2,7 @@ package com.lexian.manager.goods.controller;
 
 import javax.validation.Valid;
 
+import com.lexian.manager.goods.service.impl.CommodityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,15 +25,8 @@ import com.lexian.web.ResultHelper;
 public class CommodityController {
 
     @Autowired
-    private CommodityService commodityService;
+    private CommodityServiceImpl commodityService;
 
-    public CommodityService getCommodityService() {
-        return commodityService;
-    }
-
-    public void setCommodityService(CommodityService commodityService) {
-        this.commodityService = commodityService;
-    }
 
     /**
      * 获取商品信息commodityPicuture是商品的附图，commodtySpecs是商品的规格信息
